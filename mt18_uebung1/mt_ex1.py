@@ -28,8 +28,11 @@ def compute_ngram_precision(hypothesis, reference, ngram_nr=2):
     for gram in hypothesis:
         if gram in reference:
             counter += 1
-            
+
+    return counter/len(hypothesis)
+
+def
 
 
 if __name__ == '__main__':
-    print(open_and_tokenize(r'C:\Users\salin\Google Drive\Uni Zurich\4 Semester\Maschinelle Übersetzung\Übungen\mt18_uebung1\artikel_zeit\text_de.txt'))
+    print(open_and_tokenize(r'C:\Users\salin\Google Drive\Uni Zurich\4 Semester\Maschinelle Übersetzung\Übungen\MT-2018\mt18_uebung1\artikel_zeit\text_de.txt'))
