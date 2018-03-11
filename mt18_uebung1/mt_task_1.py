@@ -9,6 +9,7 @@
 import nltk
 from nltk.util import ngrams
 import numpy as np
+import sys
 
 
 def tokenize_file(input:str) -> list:
@@ -44,7 +45,6 @@ def compute_bleu_score(hyp, ref, ngram_nr):
         product = product * compute_ngram_precision(hyp, ref, ngram_nr)
         ngram_nr -= 1
 
-
     P = product ** (1 / N)
     #print(P)
     brevity_penalty = min(1.0, np.exp(1 - (len(ref)/len(hyp))))
@@ -52,11 +52,16 @@ def compute_bleu_score(hyp, ref, ngram_nr):
     print('%.3f' % bleu)
 
 
-if __name__ == '__main__':
-    ref = tokenize_file('test_reference.txt')
-    hyp = tokenize_file('test_hypothesis.txt')
+def main():
+    if len(sys.argv) != 3:
+        print('Please give two agruments: hypothesis and reference')
+        sys.exit()
+
+    hyp = tokenize_file(sys.argv[1])
+    ref = tokenize_file(sys.argv[2])
     precision = compute_ngram_precision(hyp, ref, 1)
-    bleu = compute_bleu_score(hyp,ref, 4)
+    bleu = compute_bleu_score(hyp, ref, 4)
 
-
+if __name__ == '__main__':
+    main()
 
