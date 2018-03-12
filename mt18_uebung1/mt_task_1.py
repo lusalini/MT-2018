@@ -57,6 +57,8 @@ def compute_bleu_score(hyp, ref, ngram_nr):
 
 
 def main():
+    """First type in the hypothesis filename, then the reference filename."""
+
     if len(sys.argv) != 3:
         print('Please give two agruments: hypothesis and reference')
         sys.exit()
