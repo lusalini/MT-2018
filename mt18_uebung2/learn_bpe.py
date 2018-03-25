@@ -25,7 +25,7 @@ def read_file(input):
                 word_list[-1] += '</w>'
                 char_list.append(word_list)
 
-        #print(char_list)
+        # print(char_list)
         return char_list
 
 
@@ -34,13 +34,23 @@ def get_starts(char_list):
     for l in char_list:
         bigrams += list(nltk.bigrams(l))
 
-    #print(bigrams)
+    # print(bigrams)
     freq_counter = Counter(bigrams)
     print(sorted(freq_counter.items(), key=lambda x: (-x[1], x[0][0], x[0][1]))[0][0])
 
 
 def merge_units(list, freq_bigram):
-    pass
+    modified_list = []
+    for word in list:
+        modified_word = []
+        for index, unit in enumerate(word):
+            if unit == freq_bigram[0] and word[index+1] == freq_bigram[1]:
+                modified_word.append(str(freq_bigram[0]) + str(freq_bigram[1]))
+            else:
+                modified_word.append(unit)
+        modified_list.append(modified_word)
+
+    return modified_list
 
 
 def find_merges():
@@ -53,8 +63,7 @@ def main():
         sys.exit()
     char_list = read_file(sys.argv[1])
     freq_bigram = get_starts(char_list)
-    #merge_units(list,freq_bigram)
-
+    # merge_units(list,freq_bigram)
 
 
 if __name__ == '__main__':
